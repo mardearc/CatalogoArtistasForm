@@ -58,17 +58,18 @@
             tbGenero = new TextBox();
             nbEdad = new NumericUpDown();
             tbNombre = new TextBox();
+            pbImagen = new PictureBox();
             lbCancion = new Label();
             lbContCancion = new Label();
             btnAtras = new Button();
             bindingSource1 = new BindingSource(components);
-            pictureBox1 = new PictureBox();
+            btnSubirFoto = new Button();
             panelDatos.SuspendLayout();
             groupBoxTipo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nbPuntuacion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nbEdad).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbImagen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lbNombre
@@ -224,6 +225,7 @@
             // 
             // panelDatos
             // 
+            panelDatos.Controls.Add(btnSubirFoto);
             panelDatos.Controls.Add(groupBoxTipo);
             panelDatos.Controls.Add(btnAceptar);
             panelDatos.Controls.Add(tbCancion);
@@ -235,7 +237,7 @@
             panelDatos.Controls.Add(tbNombre);
             panelDatos.Location = new Point(33, 49);
             panelDatos.Name = "panelDatos";
-            panelDatos.Size = new Size(484, 263);
+            panelDatos.Size = new Size(447, 263);
             panelDatos.TabIndex = 17;
             panelDatos.Visible = false;
             // 
@@ -335,6 +337,15 @@
             tbNombre.Size = new Size(125, 27);
             tbNombre.TabIndex = 20;
             // 
+            // pbImagen
+            // 
+            pbImagen.Location = new Point(486, 49);
+            pbImagen.Name = "pbImagen";
+            pbImagen.Size = new Size(219, 263);
+            pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            pbImagen.TabIndex = 21;
+            pbImagen.TabStop = false;
+            // 
             // lbCancion
             // 
             lbCancion.AutoSize = true;
@@ -362,20 +373,22 @@
             btnAtras.UseVisualStyleBackColor = true;
             btnAtras.Click += btnAtras_Click;
             // 
-            // pictureBox1
+            // btnSubirFoto
             // 
-            pictureBox1.Location = new Point(553, 49);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(189, 263);
-            pictureBox1.TabIndex = 21;
-            pictureBox1.TabStop = false;
+            btnSubirFoto.Location = new Point(326, 164);
+            btnSubirFoto.Name = "btnSubirFoto";
+            btnSubirFoto.Size = new Size(94, 29);
+            btnSubirFoto.TabIndex = 29;
+            btnSubirFoto.Text = "Subir Foto";
+            btnSubirFoto.UseVisualStyleBackColor = true;
+            btnSubirFoto.Click += btnSubirFoto_Click;
             // 
             // FormListado
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(pictureBox1);
+            Controls.Add(pbImagen);
             Controls.Add(btnAtras);
             Controls.Add(lbNombreTipo);
             Controls.Add(lbPuntuacion);
@@ -407,8 +420,8 @@
             groupBoxTipo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nbPuntuacion).EndInit();
             ((System.ComponentModel.ISupportInitialize)nbEdad).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -448,6 +461,7 @@
         private RadioButton rbSolista;
         private Button btnAtras;
         private BindingSource bindingSource1;
-        private PictureBox pictureBox1;
+        private PictureBox pbImagen;
+        private Button btnSubirFoto;
     }
 }

@@ -17,6 +17,7 @@ namespace CatalogoArtistas.model
         public string Nacionalidad { get; set; }
         public string CancionMasEscuchada { get; set; }
         public double Puntuacion { get; set; }
+        public int Id { get; set; }
 
         //Constructores
         public Artista(string nombre, int edad, string genero, string nacionalidad, string cancionMasEscuchada, double puntuacion)
@@ -28,7 +29,10 @@ namespace CatalogoArtistas.model
             this.Nacionalidad = nacionalidad.VerificaTam(TAM_NACIONALIDAD);
             this.CancionMasEscuchada = cancionMasEscuchada.VerificaTam(TAM_CANCION);
             this.Puntuacion = puntuacion;
+            
         }
+
+        
 
         public override string ToString()
         {

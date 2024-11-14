@@ -182,10 +182,13 @@ namespace CatalogoArtistas.controller
         {
             int cont = 0;
             foreach (Artista artista in artistasEliminar) {
+                //Eliminar artista
+                int indice = Artistas.IndexOf(artista);
                 Artistas.Remove(artista);
                 cont++;
+
             }
-            
+
             EscribirDatos();
             return cont;
         }

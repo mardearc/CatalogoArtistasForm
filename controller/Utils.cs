@@ -1,4 +1,6 @@
-﻿namespace CatalogoArtistas.controller
+﻿using CatalogoArtistas.model;
+
+namespace CatalogoArtistas.controller
 {
     public static partial class Utils
     {
@@ -67,6 +69,16 @@
             }
 
             return esCorrecto;
+        }
+
+        public static int GenerarNuevoId(List<Artista> listaArtistas)
+        {
+            if (listaArtistas.Count == 0)
+            {
+                return 1; // Si la lista está vacía, el primer ID será 1
+            }
+
+            return listaArtistas.Max(artista => artista.Id) + 1; // Incrementa el ID más alto
         }
     }
 }

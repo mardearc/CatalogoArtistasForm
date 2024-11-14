@@ -33,6 +33,7 @@ namespace CatalogoArtistasForm.model
             btnPasar.Enabled = cont < max - 1;
 
             btnVolver.Enabled = !(cont <= 0);
+
         }
 
         private void btnPasar_Click(object sender, EventArgs e)
@@ -50,6 +51,21 @@ namespace CatalogoArtistasForm.model
         }
         private void Cargar()
         {
+            
+            string rutaImagen = $"../../../images/{artistas[cont].Nombre.Trim()}.jpg";
+
+            
+            if (File.Exists((rutaImagen)))
+            {
+                pbImagen.Image = Image.FromFile(rutaImagen);
+            }
+            else
+            {
+                pbImagen.Image = Image.FromFile("../../../images/default.jpg");
+            }
+            
+
+            
             lbContArtista.Text = $"{cont + 1} de {max}";
             lbContNombre.Text = artistas[cont].Nombre;
             lblContEdad.Text = artistas[cont].Edad.ToString();
@@ -86,10 +102,12 @@ namespace CatalogoArtistasForm.model
         private void btnEliminar_Click(object sender, EventArgs e)
         {
 
-            DialogResult respuesta = MessageBox.Show($"¿Seguro que quiere borrar el artista?", "¡CUIDADO!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult respuesta = MessageBox.Show($"¿Seguro que quiere borrar el artista?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            pbImagen.Image = Image.FromFile("../../../images/default.jpg");
 
             if (respuesta == DialogResult.Yes)
             {
+                
                 List<Artista> eliminar = new List<Artista>();
                 eliminar.Add(artistas[cont]);
                 ctrlArtista.EliminarArtista(eliminar);
@@ -102,12 +120,8 @@ namespace CatalogoArtistasForm.model
                 if (cont == max) // Si se borra el último elemento se muestra el anterior
                 {
                     cont--;
-                    Cargar();
                 }
-                else
-                {
-                    Cargar();
-                }
+                Cargar();
             }
 
         }
@@ -138,6 +152,7 @@ namespace CatalogoArtistasForm.model
             btnVolver.Enabled = false;
             btnModificar.Enabled = false;
             btnAtras.Enabled = false;
+            pbImagen.Visible = false;
 
 
         }
@@ -175,6 +190,7 @@ namespace CatalogoArtistasForm.model
             btnVolver.Enabled = true;
             btnModificar.Enabled = true;
             btnAtras.Enabled = true;
+            pbImagen.Visible = true;
 
             panelDatos.Visible = false;
         }
@@ -197,6 +213,42 @@ namespace CatalogoArtistasForm.model
         private void btnAtras_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSubirFoto_Click(object sender, EventArgs e)
+        {
+            string rutaImagen = $"../../../images/{artistas[cont].Nombre.Trim()}.jpg";
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                // Configuración del cuadro de diálogo para solo JPG
+                ofd.Filter = "Archivos JPG (*.jpg)|*.jpg";
+                ofd.Title = "Seleccione una imagen JPG";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Validar que el archivo sea JPG (aunque el filtro ya lo limita)
+                        if (Path.GetExtension(ofd.FileName).ToLower() != ".jpg")
+                        {
+                            MessageBox.Show("Por favor, seleccione un archivo JPG válido.", "Formato no admitido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // Mostrar la imagen en el PictureBox
+                        pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+                        pbImagen.Image = Image.FromFile(ofd.FileName);
+
+                        // Copiar la imagen al directorio de la aplicación con el nombre basado en cont
+                        File.Copy(ofd.FileName, rutaImagen, true);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al cargar o guardar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }
