@@ -11,7 +11,7 @@ namespace CatalogoArtistas.controller
 
         private static CtrlArtista mi_controlador;
         
-        private const int BYTES_ARTISTA = 137;
+        private const int BYTES_ARTISTA = 141;
         
         private CtrlArtista() { }
 
@@ -50,9 +50,11 @@ namespace CatalogoArtistas.controller
                                 string Nacionalidad = br.ReadString();
                                 string CancionMasEscuchada = br.ReadString();
                                 double Puntuacion = br.ReadDouble();
+                                int Id = br.ReadInt32();
                                 string NombreGrupo = br.ReadString();
+                                
 
-                                DeGrupo deGrupo = new DeGrupo(Nombre,Edad,Genero,Nacionalidad,CancionMasEscuchada, Puntuacion,NombreGrupo);
+                                DeGrupo deGrupo = new DeGrupo(Nombre,Edad,Genero,Nacionalidad,CancionMasEscuchada, Puntuacion, Id, NombreGrupo);
                                 Artistas.Add(deGrupo);
                             }
                             else if (primerCaracter == 'S')
@@ -63,9 +65,11 @@ namespace CatalogoArtistas.controller
                                 string Nacionalidad = br.ReadString();
                                 string CancionMasEscuchada = br.ReadString();
                                 double Puntuacion = br.ReadDouble();
+                                int Id = br.ReadInt32();
                                 string NombrePila = br.ReadString();
+                                
 
-                                Solista solista = new(Nombre, Edad, Genero,Nacionalidad,CancionMasEscuchada, Puntuacion,NombrePila);
+                                Solista solista = new(Nombre, Edad, Genero,Nacionalidad,CancionMasEscuchada, Puntuacion, Id, NombrePila);
                                 Artistas.Add(solista);
                             }
                         }
@@ -105,6 +109,7 @@ namespace CatalogoArtistas.controller
                             bw.Write(deGrupo.Nacionalidad);
                             bw.Write(deGrupo.CancionMasEscuchada);
                             bw.Write(deGrupo.Puntuacion);
+                            bw.Write(deGrupo.Id);
                             bw.Write(deGrupo.NombreGrupo);
                             numGuardados++;
                         }
@@ -117,6 +122,7 @@ namespace CatalogoArtistas.controller
                             bw.Write(solista.Nacionalidad);
                             bw.Write(solista.CancionMasEscuchada);
                             bw.Write(solista.Puntuacion);
+                            bw.Write(solista.Id);
                             bw.Write(solista.NombrePila);
                             numGuardados++;
                         }
@@ -180,13 +186,29 @@ namespace CatalogoArtistas.controller
         //Método para eliminar artistas
         public int EliminarArtista(List<Artista> artistasEliminar)
         {
+            //Contador de artistas eliminados
             int cont = 0;
+
             foreach (Artista artista in artistasEliminar) {
-                //Eliminar artista
-                int indice = Artistas.IndexOf(artista);
+                //Guardar id del artista eliminado
+                int id = artista.Id;
+
+                // Elimina la imagen asociada al artista.
+                string rutaImagen = $"../../../images/{id}.jpg";
+                if (File.Exists(rutaImagen))
+                {
+                    try
+                    {
+                        File.Delete(rutaImagen);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"No se pudo eliminar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                //Eliminar el artista y sumar el contador
                 Artistas.Remove(artista);
                 cont++;
-
             }
 
             EscribirDatos();

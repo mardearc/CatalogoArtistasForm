@@ -27,6 +27,9 @@ namespace CatalogoArtistasForm.model
             artistas = ctrlArtista.ConsultarDatos();
             max = artistas.Count;
             lbContArtista.Text = $"{cont + 1} de {max}";
+
+            
+
             Cargar();
 
 
@@ -51,39 +54,88 @@ namespace CatalogoArtistasForm.model
         }
         private void Cargar()
         {
-            
-            string rutaImagen = $"../../../images/{artistas[cont].Nombre.Trim()}.jpg";
+            string rutaImagen = "";
+            if (artistas.Count > 0)
+            {
+                rutaImagen = $"../../../images/{artistas[cont].Id}.jpg";
 
-            
-            if (File.Exists((rutaImagen)))
-            {
-                pbImagen.Image = Image.FromFile(rutaImagen);
-            }
-            else
-            {
-                pbImagen.Image = Image.FromFile("../../../images/default.jpg");
-            }
-            
+                // Liberar cualquier imagen previamente cargada.
+                if (pbImagen.Image != null)
+                {
+                    pbImagen.Image.Dispose();
+                    pbImagen.Image = null;
+                }
 
-            
-            lbContArtista.Text = $"{cont + 1} de {max}";
-            lbContNombre.Text = artistas[cont].Nombre;
-            lblContEdad.Text = artistas[cont].Edad.ToString();
-            lbContGenero.Text = artistas[cont].Genero;
-            lbContNacionalidad.Text = artistas[cont].Nacionalidad;
-            lbContCancion.Text = artistas[cont].CancionMasEscuchada;
-            lbContPuntuacion.Text = artistas[cont].Puntuacion.ToString();
-            if (artistas[cont] is Solista solista)
-            {
-                lbNombreTipo.Text = "Nombre de pila:";
-                lbContTipo.Text = solista.NombrePila;
-            }
-            else if (artistas[cont] is DeGrupo degrupo)
-            {
-                lbNombreTipo.Text = "Nombre de grupo:";
-                lbContTipo.Text = degrupo.NombreGrupo;
+                if (File.Exists(rutaImagen))
+                {
+                    pbImagen.Image = Image.FromFile(rutaImagen);
+                }
+                else
+                {
+                    pbImagen.Image = Image.FromFile("../../../images/default.jpg");
+                }
+
+                lbContArtista.Text = $"{cont + 1} de {max}";
+                lbContNombre.Text = artistas[cont].Nombre;
+                lblContEdad.Text = artistas[cont].Edad.ToString();
+                lbContGenero.Text = artistas[cont].Genero;
+                lbContNacionalidad.Text = artistas[cont].Nacionalidad;
+                lbContCancion.Text = artistas[cont].CancionMasEscuchada;
+                lbContPuntuacion.Text = artistas[cont].Puntuacion.ToString();
+
+                if (artistas[cont] is Solista solista)
+                {
+                    lbNombreTipo.Text = "Nombre de pila:";
+                    lbContTipo.Text = solista.NombrePila;
+                }
+                else if (artistas[cont] is DeGrupo degrupo)
+                {
+                    lbNombreTipo.Text = "Nombre de grupo:";
+                    lbContTipo.Text = degrupo.NombreGrupo;
+                }
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show($"¿Seguro que quiere borrar el artista?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (respuesta == DialogResult.Yes)
+            {
+                List<Artista> eliminar = new List<Artista>();
+                eliminar.Add(artistas[cont]);
+
+                try
+                {
+                    string rutaImagen = $"../../../images/{artistas[cont].Id}.jpg";
+                    // Liberar la imagen antes de eliminar el archivo.
+                    if (pbImagen.Image != null)
+                    {
+                        pbImagen.Image.Dispose();
+                        pbImagen.Image = null;
+                    }
+                    ctrlArtista.EliminarArtista(eliminar);
+                    max--;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"No se pudo eliminar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                
+
+                if (max == 0) // Si no hay elementos en la lista, cierra el formulario
+                {
+                    this.Close();
+                }
+                if (cont == max) // Si se borra el último elemento, muestra el anterior
+                {
+                    cont--;
+                }
+                Cargar();
+            }
+        }
+
         private void btnVolver_Click(object sender, EventArgs e)
         {
             if (cont > 0)
@@ -99,32 +151,7 @@ namespace CatalogoArtistasForm.model
             btnVolver.Enabled = !(cont <= 0);
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-
-            DialogResult respuesta = MessageBox.Show($"¿Seguro que quiere borrar el artista?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            pbImagen.Image = Image.FromFile("../../../images/default.jpg");
-
-            if (respuesta == DialogResult.Yes)
-            {
-                
-                List<Artista> eliminar = new List<Artista>();
-                eliminar.Add(artistas[cont]);
-                ctrlArtista.EliminarArtista(eliminar);
-                max--;
-
-                if (max == 0) //Si no hay elementos en la lista se cierra el formulario
-                {
-                    this.Close();
-                }
-                if (cont == max) // Si se borra el último elemento se muestra el anterior
-                {
-                    cont--;
-                }
-                Cargar();
-            }
-
-        }
+        
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -167,18 +194,19 @@ namespace CatalogoArtistasForm.model
             string Cancion = tbCancion.Text;
             double Puntuacion = Double.Parse(nbPuntuacion.Value.ToString());
             string NombreTipo = tbTipo.Text;
+            int id = artistas[cont].Id;
 
 
 
             if (rbSolista.Checked)
             {
 
-                Solista solista = new(Nombre, Edad, Genero, Nacionalidad, Cancion, Puntuacion, NombreTipo);
+                Solista solista = new(Nombre, Edad, Genero, Nacionalidad, Cancion, Puntuacion, id, NombreTipo);
                 a = solista;
             }
             else
             {
-                DeGrupo deGrupo = new(Nombre, Edad, Genero, Nacionalidad, Cancion, Puntuacion, NombreTipo);
+                DeGrupo deGrupo = new(Nombre, Edad, Genero, Nacionalidad, Cancion, Puntuacion, id, NombreTipo);
                 a = deGrupo;
             }
 
@@ -212,12 +240,21 @@ namespace CatalogoArtistasForm.model
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
+            // Liberar la imagen antes de cerrar el formulario
+            if (pbImagen.Image != null)
+            {
+                pbImagen.Image.Dispose();
+                pbImagen.Image = null;
+            }
+            FormConsultar form = new FormConsultar();
+            this.Hide();
+            form.ShowDialog();
             this.Close();
         }
 
         private void btnSubirFoto_Click(object sender, EventArgs e)
         {
-            string rutaImagen = $"../../../images/{artistas[cont].Nombre.Trim()}.jpg";
+            string rutaImagen = $"../../../images/{artistas[cont].Id}.jpg";
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 // Configuración del cuadro de diálogo para solo JPG

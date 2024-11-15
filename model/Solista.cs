@@ -14,6 +14,12 @@ namespace CatalogoArtistas.model
             this.NombrePila = nombrePila.VerificaTam(TAM_NOMPILA); //Verificar que se guarda con el tamño adecuado
         }
 
+        public Solista(string nombre, int edad, string genero, string nacionalidad, string cancionMasEscuchada, double puntuacion, int id, string nombrePila) : base(nombre, edad, genero, nacionalidad, cancionMasEscuchada, puntuacion, id)
+        {
+            this.NombrePila = nombrePila.VerificaTam(TAM_NOMPILA); //Verificar que se guarda con el tamño adecuado
+            this.Id = id;
+        }
+
 
         public override string ToString()
         {

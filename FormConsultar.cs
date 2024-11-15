@@ -57,7 +57,9 @@ namespace CatalogoArtistasForm
         private void btnAbrirListado_Click(object sender, EventArgs e)
         {
             FormListado formListado = new FormListado();
+            this.Hide();
             formListado.ShowDialog();
+            this.Close();
         }
 
         private void buscarToolStripMenuItem_Click(object sender, EventArgs e)

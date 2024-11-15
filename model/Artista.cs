@@ -20,7 +20,7 @@ namespace CatalogoArtistas.model
         public int Id { get; set; }
 
         //Constructores
-        public Artista(string nombre, int edad, string genero, string nacionalidad, string cancionMasEscuchada, double puntuacion)
+        public Artista(string nombre, int edad, string genero, string nacionalidad, string cancionMasEscuchada, double puntuacion) //Constructor para genera un nuevo id
         {
             //Verificar que se guardan con el tamño adecuado
             this.Nombre = nombre.VerificaTam(TAM_NOMBRE);
@@ -29,10 +29,21 @@ namespace CatalogoArtistas.model
             this.Nacionalidad = nacionalidad.VerificaTam(TAM_NACIONALIDAD);
             this.CancionMasEscuchada = cancionMasEscuchada.VerificaTam(TAM_CANCION);
             this.Puntuacion = puntuacion;
-            
+            this.Id = Utils.GenerarNuevoId();
         }
 
-        
+        public Artista(string nombre, int edad, string genero, string nacionalidad, string cancionMasEscuchada, double puntuacion, int id) //Construcctor para cuando el id ya existe
+        {
+            //Verificar que se guardan con el tamño adecuado
+            this.Nombre = nombre.VerificaTam(TAM_NOMBRE);
+            this.Edad = edad;
+            this.Genero = genero.VerificaTam(TAM_GENERO);
+            this.Nacionalidad = nacionalidad.VerificaTam(TAM_NACIONALIDAD);
+            this.CancionMasEscuchada = cancionMasEscuchada.VerificaTam(TAM_CANCION);
+            this.Puntuacion = puntuacion;
+            this.Id = id;
+        }
+
 
         public override string ToString()
         {

@@ -12,7 +12,7 @@ namespace CatalogoArtistasForm
         {
             InitializeComponent();
 
-
+            pbImagen.Image = Image.FromFile("../../../images/default.jpg");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -94,7 +94,7 @@ namespace CatalogoArtistasForm
             }
             else
             {
-                MessageBox.Show("Debe asignar un nombre", "Error al agregar",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Debe asignar un nombre", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbNombre.BackColor = Color.Red;
                 correcto = false;
             }
@@ -106,8 +106,8 @@ namespace CatalogoArtistasForm
             else
             {
                 MessageBox.Show("Debe asignar una edad", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                nbEdad.BackColor= Color.Red;
-                correcto= false;
+                nbEdad.BackColor = Color.Red;
+                correcto = false;
             }
             if (tbGenero.Text.Length > 0)
             {
@@ -179,6 +179,13 @@ namespace CatalogoArtistasForm
                     a = deGrupo;
                 }
 
+                // Liberar la imagen al aceptar
+                if (pbImagen.Image != null)
+                {
+                    pbImagen.Image.Dispose();
+                    pbImagen.Image = Image.FromFile("../../../images/default.jpg");
+                }
+
                 ctrlArtista.AddArtista(a);
 
                 tbNombre.Text = "";
@@ -191,7 +198,7 @@ namespace CatalogoArtistasForm
 
                 MessageBox.Show("Artista añadido", "¡Éxito!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
+
         }
 
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -226,6 +233,42 @@ namespace CatalogoArtistasForm
             this.Hide();
             buscarForm.ShowDialog();
             this.Close();
+        }
+
+        private void btnSubirFoto_Click(object sender, EventArgs e)
+        {
+            string rutaImagen = $"../../../images/{Utils.GenerarNuevoId()}.jpg";
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                // Configuración del cuadro de diálogo para solo JPG
+                ofd.Filter = "Archivos JPG (*.jpg)|*.jpg";
+                ofd.Title = "Seleccione una imagen JPG";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Validar que el archivo sea JPG (aunque el filtro ya lo limita)
+                        if (Path.GetExtension(ofd.FileName).ToLower() != ".jpg")
+                        {
+                            MessageBox.Show("Por favor, seleccione un archivo JPG válido.", "Formato no admitido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // Mostrar la imagen en el PictureBox
+                        pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+                        pbImagen.Image = Image.FromFile(ofd.FileName);
+
+                        // Copiar la imagen al directorio de la aplicación con el nombre basado en cont
+                        File.Copy(ofd.FileName, rutaImagen, true);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al cargar o guardar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

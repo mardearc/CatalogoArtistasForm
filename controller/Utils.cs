@@ -71,8 +71,11 @@ namespace CatalogoArtistas.controller
             return esCorrecto;
         }
 
-        public static int GenerarNuevoId(List<Artista> listaArtistas)
+        public static int GenerarNuevoId()
         {
+            CtrlArtista ctrlArtista = CtrlArtista.GetControlador();
+            List<Artista> listaArtistas = ctrlArtista.ConsultarDatos();
+
             if (listaArtistas.Count == 0)
             {
                 return 1; // Si la lista está vacía, el primer ID será 1

@@ -13,6 +13,10 @@ namespace CatalogoArtistas.model
         {
             this.NombreGrupo = nombreGrupo.VerificaTam(TAM_NOMGRUPO); //Verificar que se guarda con el tamño adecuado
         }
+        public DeGrupo(string nombre, int edad, string genero, string nacionalidad, string cancionMasEscuchada, double puntuacion, int id, string nombreGrupo) : base(nombre, edad, genero, nacionalidad, cancionMasEscuchada, puntuacion, id)
+        {
+            this.NombreGrupo = nombreGrupo.VerificaTam(TAM_NOMGRUPO); //Verificar que se guarda con el tamño adecuado
+        }
 
         public override string ToString()
         {

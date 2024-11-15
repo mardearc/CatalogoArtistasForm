@@ -52,10 +52,13 @@
             tbNombreTipo = new TextBox();
             lblNombreTipo = new Label();
             btnAdd = new Button();
+            btnSubirFoto = new Button();
+            pbImagen = new PictureBox();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nbEdad).BeginInit();
             gbTipo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nbPuntuacion).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbImagen).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -245,7 +248,7 @@
             // 
             // tbNombreTipo
             // 
-            tbNombreTipo.Location = new Point(590, 241);
+            tbNombreTipo.Location = new Point(596, 223);
             tbNombreTipo.Name = "tbNombreTipo";
             tbNombreTipo.Size = new Size(125, 27);
             tbNombreTipo.TabIndex = 17;
@@ -253,7 +256,7 @@
             // lblNombreTipo
             // 
             lblNombreTipo.AutoSize = true;
-            lblNombreTipo.Location = new Point(418, 244);
+            lblNombreTipo.Location = new Point(424, 226);
             lblNombreTipo.Name = "lblNombreTipo";
             lblNombreTipo.Size = new Size(114, 20);
             lblNombreTipo.TabIndex = 16;
@@ -262,7 +265,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(609, 336);
+            btnAdd.Location = new Point(596, 382);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(94, 29);
             btnAdd.TabIndex = 18;
@@ -270,11 +273,32 @@
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
+            // btnSubirFoto
+            // 
+            btnSubirFoto.Location = new Point(468, 307);
+            btnSubirFoto.Name = "btnSubirFoto";
+            btnSubirFoto.Size = new Size(94, 29);
+            btnSubirFoto.TabIndex = 19;
+            btnSubirFoto.Text = "Subir Foto";
+            btnSubirFoto.UseVisualStyleBackColor = true;
+            btnSubirFoto.Click += btnSubirFoto_Click;
+            // 
+            // pbImagen
+            // 
+            pbImagen.Location = new Point(596, 290);
+            pbImagen.Name = "pbImagen";
+            pbImagen.Size = new Size(61, 62);
+            pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            pbImagen.TabIndex = 20;
+            pbImagen.TabStop = false;
+            // 
             // FormAgregar
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pbImagen);
+            Controls.Add(btnSubirFoto);
             Controls.Add(btnAdd);
             Controls.Add(tbNombreTipo);
             Controls.Add(lblNombreTipo);
@@ -301,6 +325,7 @@
             gbTipo.ResumeLayout(false);
             gbTipo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nbPuntuacion).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -332,5 +357,7 @@
         private Label lblNombreTipo;
         private Button btnAdd;
         private ToolStripComboBox toolStripComboBox1;
+        private Button btnSubirFoto;
+        private PictureBox pbImagen;
     }
 }
