@@ -12,6 +12,7 @@ namespace CatalogoArtistasForm
         {
             InitializeComponent();
 
+            //Asignar imagen por defecto a el PictureBox
             pbImagen.Image = Image.FromFile("../../../images/default.jpg");
         }
 
@@ -53,6 +54,7 @@ namespace CatalogoArtistasForm
 
         }
 
+        //Método para poner la puntuación a 10 si se pone un número mayor
         private void nbPuntuacion_ValueChanged(object sender, EventArgs e)
         {
             if (nbPuntuacion.Value >= 10)
@@ -61,11 +63,12 @@ namespace CatalogoArtistasForm
             }
         }
 
+        //Cambiar el texto del label si se selecciona el radio button solista
         private void rbSolista_CheckedChanged(object sender, EventArgs e)
         {
             lblNombreTipo.Text = "Nombre de pila";
         }
-
+        //Cambiar el texto del label si se selecciona el radio button de grupo
         private void rbDeGrupo_CheckedChanged(object sender, EventArgs e)
         {
             lblNombreTipo.Text = "Nombre del grupo";
@@ -76,9 +79,12 @@ namespace CatalogoArtistasForm
 
         }
 
+        //Método para añadir un nuevo artista
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Artista a;
+
+            
             string Nombre = "";
             int Edad = 0;
             string Genero = "";
@@ -87,78 +93,80 @@ namespace CatalogoArtistasForm
             double Puntuacion = 0;
             string NombreTipo = "";
             bool correcto = true;
+
+            //Comprobar que ha introducido un nombre
             if (tbNombre.Text.Length > 0)
             {
                 Nombre = tbNombre.Text;
                 tbNombre.BackColor = Color.White;
             }
-            else
+            else //Lanzar MessageBox de error si no cumple condición
             {
                 MessageBox.Show("Debe asignar un nombre", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbNombre.BackColor = Color.Red;
                 correcto = false;
             }
-            if (nbEdad.Text != "0")
+            if (nbEdad.Text != "0") //Comprobar que ha introducido una edad
             {
                 Edad = Int32.Parse(nbEdad.Value.ToString());
                 nbEdad.BackColor = Color.White;
             }
-            else
+            else //Lanzar MessageBox de error si no cumple condición
             {
                 MessageBox.Show("Debe asignar una edad", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 nbEdad.BackColor = Color.Red;
                 correcto = false;
             }
-            if (tbGenero.Text.Length > 0)
+            if (tbGenero.Text.Length > 0)  //Comprobar que ha introducido un género
             {
                 Genero = tbGenero.Text;
                 tbGenero.BackColor = Color.White;
             }
-            else
+            else //Lanzar MessageBox de error si no cumple condición
             {
                 MessageBox.Show("Debe asignar un género", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbGenero.BackColor = Color.Red;
                 correcto = false;
             }
-            if (tbNacionalidad.Text.Length > 0)
+            if (tbNacionalidad.Text.Length > 0)  //Comprobar que ha introducido una nacionalidad
             {
                 Nacionalidad = tbNacionalidad.Text;
                 tbNacionalidad.BackColor = Color.White;
             }
-            else
+            else //Lanzar MessageBox de error si no cumple condición
             {
                 MessageBox.Show("Debe asignar una nacionalidad", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbNacionalidad.BackColor = Color.Red;
                 correcto = false;
             }
-            if (tbCancion.Text.Length > 0)
+            if (tbCancion.Text.Length > 0)  //Comprobar que ha introducido una canción
             {
                 Cancion = tbCancion.Text;
                 tbCancion.BackColor = Color.White;
             }
-            else
+            else //Lanzar MessageBox de error si no cumple condición
             {
                 MessageBox.Show("Debe asignar una canción", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbCancion.BackColor = Color.Red;
                 correcto = false;
             }
-            if (nbPuntuacion.Text != "0,00")
+            if (nbPuntuacion.Text != "0,00") //Comprobar que ha introducido una puntuación
             {
                 Puntuacion = Double.Parse(nbPuntuacion.Value.ToString());
                 nbPuntuacion.BackColor = Color.White;
             }
-            else
+            else //Lanzar MessageBox de error si no cumple condición
             {
                 MessageBox.Show("Debe asignar una puntuación", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 nbPuntuacion.BackColor = Color.Red;
                 correcto = false;
             }
-            if (tbNombreTipo.Text.Length > 0)
+            if (tbNombreTipo.Text.Length > 0)  //Comprobar que ha introducido un nombre de tipo
             {
                 NombreTipo = tbNombreTipo.Text;
                 tbNombreTipo.BackColor = Color.White;
             }
-            else
+            else //Lanzar MessageBox de error si no cumple condición
             {
                 string Tipo = rbDeGrupo.Checked ? "de grupo" : "de pila";
                 MessageBox.Show($"Debe asignar un nombre {Tipo}", "Error al agregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -166,7 +174,7 @@ namespace CatalogoArtistasForm
                 correcto = false;
             }
 
-            if (correcto)
+            if (correcto)  //Si esta todo bien introducido se añade a la lista el artista
             {
                 if (rbSolista.Checked)
                 {
@@ -188,6 +196,7 @@ namespace CatalogoArtistasForm
 
                 ctrlArtista.AddArtista(a);
 
+                //Poner textfields en blanco
                 tbNombre.Text = "";
                 nbEdad.Value = 0;
                 tbGenero.Text = "";

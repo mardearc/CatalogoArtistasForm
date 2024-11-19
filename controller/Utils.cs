@@ -31,46 +31,8 @@ namespace CatalogoArtistas.controller
             return sePuede;
         }
 
-        public static bool CompruebaEdad(string entero)
 
-        {
-            bool esCorrecto = false;
-            if (Int32.TryParse(entero, out int numero))
-            {
-                if (numero > 0)
-                {
-                    esCorrecto = true;
-                }
-
-            }
-            else
-            {
-                Console.WriteLine("Entrada inválida, por favor, introduzca una edad");
-            }
-
-            return esCorrecto;
-        }
-
-        public static bool CompruebaPuntuacion(string puntuacion)
-
-        {
-            bool esCorrecto = false;
-            if (Int32.TryParse(puntuacion, out int numero))
-            {
-                if (numero > 0)
-                {
-                    esCorrecto = true;
-                }
-
-            }
-            else
-            {
-                Console.WriteLine("Entrada inválida, por favor, introduzca una edad");
-            }
-
-            return esCorrecto;
-        }
-
+        //Genera un nuevo Id tomando como referencia el Id más alto existente
         public static int GenerarNuevoId()
         {
             CtrlArtista ctrlArtista = CtrlArtista.GetControlador();

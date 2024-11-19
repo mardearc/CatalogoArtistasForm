@@ -14,7 +14,6 @@ namespace CatalogoArtistasForm
             ctrlArtista.CargarDatos();
 
             dgConsultar.DataSource = ctrlArtista.ConsultarDatos();
-
         }
 
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -22,15 +21,13 @@ namespace CatalogoArtistasForm
 
         }
 
+        //Cerrar esta ventana cuando se abra la de agregar
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormAgregar agregar = new();
             this.Hide();
             agregar.ShowDialog();
             this.Close();
-
-
-
         }
 
         private void lbArtistas_SelectedIndexChanged(object sender, EventArgs e)
@@ -38,6 +35,7 @@ namespace CatalogoArtistasForm
 
         }
 
+        //Cerrar esta ventana cuando se abra la de ordenar
         private void ordenarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormOrdenar ordenar = new FormOrdenar();
@@ -46,6 +44,7 @@ namespace CatalogoArtistasForm
             this.Close();
         }
 
+        //Cerrar esta ventana cuando se abra la de eliminar
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormEliminar borrarEmpleado = new FormEliminar();
@@ -54,6 +53,7 @@ namespace CatalogoArtistasForm
             this.Close();
         }
 
+        //Cerrar esta ventana cuando se abra la de abrir listado
         private void btnAbrirListado_Click(object sender, EventArgs e)
         {
             FormListado formListado = new FormListado();
@@ -62,6 +62,7 @@ namespace CatalogoArtistasForm
             this.Close();
         }
 
+        //Cerrar esta ventana cuando se abra la de buscar
         private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormBuscar buscarForm = new FormBuscar();

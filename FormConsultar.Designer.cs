@@ -107,7 +107,7 @@
             btnAbrirListado.UseVisualStyleBackColor = true;
             btnAbrirListado.Click += btnAbrirListado_Click;
             // 
-            // Form1
+            // FormConsultar
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -116,7 +116,7 @@
             Controls.Add(dgConsultar);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Name = "Form1";
+            Name = "FormConsultar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Catálogo de Artistas";
             menuStrip1.ResumeLayout(false);

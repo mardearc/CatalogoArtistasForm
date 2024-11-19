@@ -467,7 +467,7 @@ namespace CatalogoArtistas.controller
             return listFiltrada; //Devuelve la lista filtrada
         }
 
-        //Método para modificar un artista
+        //Método para modificar un artista, recibe el índice del que sea modificar y el Artista modificado
         internal void Modificar(int busqueda, Artista modificado)
         {
             

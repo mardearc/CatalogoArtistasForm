@@ -22,7 +22,7 @@ namespace CatalogoArtistas.model
         //Constructores
         public Artista(string nombre, int edad, string genero, string nacionalidad, string cancionMasEscuchada, double puntuacion) //Constructor para genera un nuevo id
         {
-            //Verificar que se guardan con el tamño adecuado
+            //Verificar que se guardan con el tamaño adecuado
             this.Nombre = nombre.VerificaTam(TAM_NOMBRE);
             this.Edad = edad;
             this.Genero = genero.VerificaTam(TAM_GENERO);
