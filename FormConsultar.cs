@@ -6,11 +6,12 @@ namespace CatalogoArtistasForm
 {
     public partial class FormConsultar : Form
     {
+        CtrlArtista ctrlArtista = CtrlArtista.GetControlador();
         public FormConsultar()
         {
             InitializeComponent();
 
-            CtrlArtista ctrlArtista = CtrlArtista.GetControlador();
+
             ctrlArtista.CargarDatos();
 
             dgConsultar.DataSource = ctrlArtista.ConsultarDatos();
@@ -69,6 +70,42 @@ namespace CatalogoArtistasForm
             this.Hide();
             buscarForm.ShowDialog();
             this.Close();
+        }
+
+        private void cargarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                // Configuración del cuadro de diálogo solo JPG
+                ofd.Filter = "Archivos DAT (*.dat)|*.dat)";
+                ofd.Title = "Seleccione un archivo DAT";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Validar que el archivo sea JPG (aunque el filtro ya lo limita)
+                        if (Path.GetExtension(ofd.FileName).ToLower() != ".dat")
+                        {
+                            MessageBox.Show("Por favor, seleccione un archivo DAT válido.", "Formato no admitido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        ctrlArtista.CargarDatos(ofd.FileName);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al cargar o guardar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -47,6 +47,7 @@
             btnEliminar = new Button();
             btnModificar = new Button();
             panelDatos = new Panel();
+            btnSubirFoto = new Button();
             groupBoxTipo = new GroupBox();
             rbDeGrupo = new RadioButton();
             rbSolista = new RadioButton();
@@ -63,7 +64,6 @@
             lbContCancion = new Label();
             btnAtras = new Button();
             bindingSource1 = new BindingSource(components);
-            btnSubirFoto = new Button();
             panelDatos.SuspendLayout();
             groupBoxTipo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nbPuntuacion).BeginInit();
@@ -241,6 +241,16 @@
             panelDatos.TabIndex = 17;
             panelDatos.Visible = false;
             // 
+            // btnSubirFoto
+            // 
+            btnSubirFoto.Location = new Point(326, 164);
+            btnSubirFoto.Name = "btnSubirFoto";
+            btnSubirFoto.Size = new Size(94, 29);
+            btnSubirFoto.TabIndex = 29;
+            btnSubirFoto.Text = "Subir Foto";
+            btnSubirFoto.UseVisualStyleBackColor = true;
+            btnSubirFoto.Click += btnSubirFoto_Click;
+            // 
             // groupBoxTipo
             // 
             groupBoxTipo.Controls.Add(rbDeGrupo);
@@ -372,16 +382,6 @@
             btnAtras.Text = "Volver";
             btnAtras.UseVisualStyleBackColor = true;
             btnAtras.Click += btnAtras_Click;
-            // 
-            // btnSubirFoto
-            // 
-            btnSubirFoto.Location = new Point(326, 164);
-            btnSubirFoto.Name = "btnSubirFoto";
-            btnSubirFoto.Size = new Size(94, 29);
-            btnSubirFoto.TabIndex = 29;
-            btnSubirFoto.Text = "Subir Foto";
-            btnSubirFoto.UseVisualStyleBackColor = true;
-            btnSubirFoto.Click += btnSubirFoto_Click;
             // 
             // FormListado
             // 

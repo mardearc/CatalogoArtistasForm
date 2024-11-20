@@ -210,6 +210,7 @@ namespace CatalogoArtistasForm
 
         }
 
+        //Cerrar esta ventana si se abre la de consultar
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormConsultar form = new FormConsultar();
@@ -219,7 +220,7 @@ namespace CatalogoArtistasForm
         }
 
 
-
+        //Cerrar esta ventana si se abre la de ordenar
         private void ordenarToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             FormOrdenar ordenar = new FormOrdenar();
@@ -227,7 +228,7 @@ namespace CatalogoArtistasForm
             ordenar.ShowDialog();
             this.Close();
         }
-
+        //Cerrar esta ventana si se abre la de eliminar
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormEliminar borrarEmpleado = new FormEliminar();
@@ -235,7 +236,7 @@ namespace CatalogoArtistasForm
             borrarEmpleado.ShowDialog();
             this.Close();
         }
-
+        //Cerrar esta ventana si se abre la de buscar
         private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormBuscar buscarForm = new FormBuscar();
@@ -243,13 +244,14 @@ namespace CatalogoArtistasForm
             buscarForm.ShowDialog();
             this.Close();
         }
-
+        
+        //Botón para subir foto
         private void btnSubirFoto_Click(object sender, EventArgs e)
         {
             string rutaImagen = $"../../../images/{Utils.GenerarNuevoId()}.jpg";
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                // Configuración del cuadro de diálogo para solo JPG
+                // Configuración del cuadro de diálogo solo JPG
                 ofd.Filter = "Archivos JPG (*.jpg)|*.jpg";
                 ofd.Title = "Seleccione una imagen JPG";
 

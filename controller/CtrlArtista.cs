@@ -27,8 +27,14 @@ namespace CatalogoArtistas.controller
         }
 
         //Método para cargar los datos desde el fichero
-        public void CargarDatos()
+        public void CargarDatos(string ruta = Fichero)
         {
+
+            if (ruta != Fichero)
+            {
+                
+            }
+            
             Artistas.Clear();
             try
             {
@@ -83,8 +89,9 @@ namespace CatalogoArtistas.controller
             }
         }
 
+
         //Método para escribir los datos en el fichero
-        public void EscribirDatos()
+        public void EscribirDatos(string ruta = Fichero)
         {
             if (File.Exists(Fichero))
             {
@@ -472,6 +479,7 @@ namespace CatalogoArtistas.controller
         {
             
             Artistas[busqueda] = modificado;
+            EscribirDatos();
         }
 
     }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAgregar));
             menuStrip1 = new MenuStrip();
             consultarToolStripMenuItem = new ToolStripMenuItem();
             agregarToolStripMenuItem = new ToolStripMenuItem();
@@ -316,6 +317,7 @@
             Controls.Add(tbNombre);
             Controls.Add(lblNombre);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAgregar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormAgregar";

@@ -1,14 +1,5 @@
 ﻿using CatalogoArtistas.controller;
 using CatalogoArtistas.model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CatalogoArtistasForm.model
 {
@@ -17,30 +8,34 @@ namespace CatalogoArtistasForm.model
         CtrlArtista ctrlArtista = CtrlArtista.GetControlador();
 
         List<Artista> listBorrar = new List<Artista>();
+
         public FormBuscar()
         {
             InitializeComponent();
         }
 
+        //Método para buscar
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            //Borrar la lista por si había registros
             lbBorrar.Items.Clear();
-            Artista a;
+
             string Nombre = tbNombre.Text;
             int Edad = Int32.Parse(nbEdad.Value.ToString());
             string Genero = tbGenero.Text;
             string Nacionalidad = tbNacionalidad.Text;
             string Cancion = tbCancion.Text;
             double Puntuacion = Double.Parse(nbPuntuacion.Value.ToString());
-            char Tipo;
+            char Tipo = 'n';
             string NombrePila = null;
             string NombreGrupo = null;
-            if (rbSolista.Checked)
+
+            if (cbSolista.Checked)
             {
                 Tipo = 's';
                 NombrePila = tbNombreTipo.Text;
             }
-            else
+            if (cbDeGrupo.Checked)
             {
                 Tipo = 'g';
                 NombreGrupo = tbNombreTipo.Text;
@@ -48,6 +43,7 @@ namespace CatalogoArtistasForm.model
 
             listBorrar = ctrlArtista.Buscar(Edad, Puntuacion, Tipo, Nombre, Genero, Nacionalidad, Cancion, NombrePila, NombreGrupo);
 
+            //Agregar a la lista los artistas
             foreach (Artista artista in listBorrar)
             {
                 lbBorrar.Items.Add(artista);
@@ -84,6 +80,33 @@ namespace CatalogoArtistasForm.model
             this.Hide();
             borrarEmpleado.ShowDialog();
             this.Close();
+        }
+
+        private void cbSolista_CheckedChanged(object sender, EventArgs e)
+        {
+            cbDeGrupo.Checked = false;
+            lblNombreTipo.Text = "Nombre de pila";
+            tbNombreTipo.Visible = true;
+            lblNombreTipo.Visible = true;
+
+            if (!cbSolista.Checked)
+            {
+                tbNombreTipo.Visible = false;
+                lblNombreTipo.Visible = false;
+            }
+        }
+
+        private void cbDeGrupo_CheckedChanged(object sender, EventArgs e)
+        {
+            cbSolista.Checked = false;
+            lblNombreTipo.Text = "Nombre de Grupo";
+            tbNombreTipo.Visible = true;
+            lblNombreTipo.Visible = true;
+            if (!cbDeGrupo.Checked)
+            {
+                tbNombreTipo.Visible = false;
+                lblNombreTipo.Visible = false;
+            }
         }
     }
 }

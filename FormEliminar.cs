@@ -34,15 +34,15 @@ namespace CatalogoArtistasForm
             string Nacionalidad = tbNacionalidad.Text;
             string Cancion = tbCancion.Text;
             double Puntuacion = Double.Parse(nbPuntuacion.Value.ToString());
-            char Tipo;
+            char Tipo = 'n';
             string NombrePila = null;
             string NombreGrupo = null;
-            if (rbSolista.Checked)
+            if (cbSolista.Checked)
             {
                 Tipo = 's';
                 NombrePila = tbNombreTipo.Text;
             }
-            else
+            if (cbDeGrupo.Checked)
             {
                 Tipo = 'g';
                 NombreGrupo = tbNombreTipo.Text;
@@ -61,22 +61,30 @@ namespace CatalogoArtistasForm
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             int items = listBorrar.Count;
-            DialogResult respuesta = MessageBox.Show($"¿Seguro que quiere borrar {items} artistas?", "¡CUIDADO!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if (respuesta == DialogResult.Yes)
+            if (items > 0)
             {
+                DialogResult respuesta = MessageBox.Show($"¿Seguro que quiere borrar {items} artistas?", "¡CUIDADO!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                int cont = ctrlArtista.EliminarArtista(listBorrar);
+                if (respuesta == DialogResult.Yes)
+                {
 
-                tbNombre.Text = "";
-                nbEdad.Value = 0;
-                tbGenero.Text = "";
-                tbNacionalidad.Text = "";
-                tbCancion.Text = "";
-                nbPuntuacion.Value = 0;
-                tbNombreTipo.Text = "";
+                    int cont = ctrlArtista.EliminarArtista(listBorrar);
 
-                MessageBox.Show($"Se han eliminado {cont} artistas");
+                    tbNombre.Text = "";
+                    nbEdad.Value = 0;
+                    tbGenero.Text = "";
+                    tbNacionalidad.Text = "";
+                    tbCancion.Text = "";
+                    nbPuntuacion.Value = 0;
+                    tbNombreTipo.Text = "";
+
+                    MessageBox.Show($"Se han eliminado {cont} artistas");
+                }
+            }
+            else
+            {
+                MessageBox.Show($"No hay artistas para eliminar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -111,6 +119,33 @@ namespace CatalogoArtistasForm
             this.Hide();
             buscarForm.ShowDialog();
             this.Close();
+        }
+
+        private void cbSolista_CheckedChanged(object sender, EventArgs e)
+        {
+            cbDeGrupo.Checked = false;
+            lblNombreTipo.Text = "Nombre de pila";
+            tbNombreTipo.Visible = true;
+            lblNombreTipo.Visible = true;
+
+            if (!cbSolista.Checked)
+            {
+                tbNombreTipo.Visible = false;
+                lblNombreTipo.Visible = false;
+            }
+        }
+
+        private void cbDeGrupo_CheckedChanged(object sender, EventArgs e)
+        {
+            cbSolista.Checked = false;
+            lblNombreTipo.Text = "Nombre de Grupo";
+            tbNombreTipo.Visible = true;
+            lblNombreTipo.Visible = true;
+            if (!cbDeGrupo.Checked)
+            {
+                tbNombreTipo.Visible = false;
+                lblNombreTipo.Visible = false;
+            }
         }
     }
 }

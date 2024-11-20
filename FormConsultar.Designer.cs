@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConsultar));
             menuStrip1 = new MenuStrip();
             consultarToolStripMenuItem = new ToolStripMenuItem();
             agregarToolStripMenuItem = new ToolStripMenuItem();
             ordenarToolStripMenuItem = new ToolStripMenuItem();
             buscarToolStripMenuItem = new ToolStripMenuItem();
             eliminarToolStripMenuItem = new ToolStripMenuItem();
+            archivoToolStripMenuItem = new ToolStripMenuItem();
+            cargarToolStripMenuItem = new ToolStripMenuItem();
+            guardarToolStripMenuItem = new ToolStripMenuItem();
             dgConsultar = new DataGridView();
             btnAbrirListado = new Button();
             menuStrip1.SuspendLayout();
@@ -43,7 +47,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { consultarToolStripMenuItem, agregarToolStripMenuItem, ordenarToolStripMenuItem, buscarToolStripMenuItem, eliminarToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { consultarToolStripMenuItem, agregarToolStripMenuItem, ordenarToolStripMenuItem, buscarToolStripMenuItem, eliminarToolStripMenuItem, archivoToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
@@ -85,6 +89,27 @@
             eliminarToolStripMenuItem.Text = "Eliminar";
             eliminarToolStripMenuItem.Click += eliminarToolStripMenuItem_Click;
             // 
+            // archivoToolStripMenuItem
+            // 
+            archivoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cargarToolStripMenuItem, guardarToolStripMenuItem });
+            archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            archivoToolStripMenuItem.Size = new Size(73, 24);
+            archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // cargarToolStripMenuItem
+            // 
+            cargarToolStripMenuItem.Name = "cargarToolStripMenuItem";
+            cargarToolStripMenuItem.Size = new Size(224, 26);
+            cargarToolStripMenuItem.Text = "Cargar";
+            cargarToolStripMenuItem.Click += cargarToolStripMenuItem_Click;
+            // 
+            // guardarToolStripMenuItem
+            // 
+            guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
+            guardarToolStripMenuItem.Size = new Size(224, 26);
+            guardarToolStripMenuItem.Text = "Guardar";
+            guardarToolStripMenuItem.Click += guardarToolStripMenuItem_Click;
+            // 
             // dgConsultar
             // 
             dgConsultar.AllowUserToAddRows = false;
@@ -94,6 +119,7 @@
             dgConsultar.Name = "dgConsultar";
             dgConsultar.ReadOnly = true;
             dgConsultar.RowHeadersWidth = 51;
+            dgConsultar.ScrollBars = ScrollBars.Vertical;
             dgConsultar.Size = new Size(776, 355);
             dgConsultar.TabIndex = 1;
             // 
@@ -115,6 +141,7 @@
             Controls.Add(btnAbrirListado);
             Controls.Add(dgConsultar);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "FormConsultar";
             StartPosition = FormStartPosition.CenterScreen;
@@ -136,5 +163,8 @@
         private ToolStripMenuItem eliminarToolStripMenuItem;
         private DataGridView dgConsultar;
         private Button btnAbrirListado;
+        private ToolStripMenuItem archivoToolStripMenuItem;
+        private ToolStripMenuItem cargarToolStripMenuItem;
+        private ToolStripMenuItem guardarToolStripMenuItem;
     }
 }

@@ -41,9 +41,6 @@
             nbPuntuacion = new NumericUpDown();
             lblPuntuacion = new Label();
             tbCancion = new TextBox();
-            gbTipo = new GroupBox();
-            rbDeGrupo = new RadioButton();
-            rbSolista = new RadioButton();
             tbNacionalidad = new TextBox();
             lblNacionalidad = new Label();
             tbGenero = new TextBox();
@@ -55,10 +52,13 @@
             btnBorrar = new Button();
             fontDialog1 = new FontDialog();
             lbBorrar = new ListBox();
+            cbDeGrupo = new CheckBox();
+            cbSolista = new CheckBox();
+            groupBox1 = new GroupBox();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nbPuntuacion).BeginInit();
-            gbTipo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nbEdad).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -68,7 +68,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { consultarToolStripMenuItem, agregarToolStripMenuItem, ordenarToolStripMenuItem, buscarToolStripMenuItem, eliminarToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(540, 28);
+            menuStrip1.Size = new Size(390, 28);
             menuStrip1.TabIndex = 6;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -118,19 +118,21 @@
             // 
             // tbNombreTipo
             // 
-            tbNombreTipo.Location = new Point(598, 281);
+            tbNombreTipo.Location = new Point(188, 125);
             tbNombreTipo.Name = "tbNombreTipo";
             tbNombreTipo.Size = new Size(125, 27);
             tbNombreTipo.TabIndex = 33;
+            tbNombreTipo.Visible = false;
             // 
             // lblNombreTipo
             // 
             lblNombreTipo.AutoSize = true;
-            lblNombreTipo.Location = new Point(426, 284);
+            lblNombreTipo.Location = new Point(43, 128);
             lblNombreTipo.Name = "lblNombreTipo";
             lblNombreTipo.Size = new Size(114, 20);
             lblNombreTipo.TabIndex = 32;
             lblNombreTipo.Text = "Nombre de pila";
+            lblNombreTipo.Visible = false;
             // 
             // lblCancion
             // 
@@ -164,39 +166,6 @@
             tbCancion.Name = "tbCancion";
             tbCancion.Size = new Size(125, 27);
             tbCancion.TabIndex = 28;
-            // 
-            // gbTipo
-            // 
-            gbTipo.Controls.Add(rbDeGrupo);
-            gbTipo.Controls.Add(rbSolista);
-            gbTipo.Location = new Point(426, 118);
-            gbTipo.Name = "gbTipo";
-            gbTipo.Size = new Size(250, 125);
-            gbTipo.TabIndex = 27;
-            gbTipo.TabStop = false;
-            gbTipo.Text = "Tipo";
-            // 
-            // rbDeGrupo
-            // 
-            rbDeGrupo.AutoSize = true;
-            rbDeGrupo.Location = new Point(44, 65);
-            rbDeGrupo.Name = "rbDeGrupo";
-            rbDeGrupo.Size = new Size(94, 24);
-            rbDeGrupo.TabIndex = 1;
-            rbDeGrupo.Text = "De Grupo";
-            rbDeGrupo.UseVisualStyleBackColor = true;
-            // 
-            // rbSolista
-            // 
-            rbSolista.AutoSize = true;
-            rbSolista.Checked = true;
-            rbSolista.Location = new Point(44, 23);
-            rbSolista.Name = "rbSolista";
-            rbSolista.Size = new Size(74, 24);
-            rbSolista.TabIndex = 0;
-            rbSolista.TabStop = true;
-            rbSolista.Text = "Solista";
-            rbSolista.UseVisualStyleBackColor = true;
             // 
             // tbNacionalidad
             // 
@@ -281,21 +250,54 @@
             lbBorrar.Size = new Size(543, 104);
             lbBorrar.TabIndex = 35;
             // 
+            // cbDeGrupo
+            // 
+            cbDeGrupo.AutoSize = true;
+            cbDeGrupo.Location = new Point(43, 86);
+            cbDeGrupo.Name = "cbDeGrupo";
+            cbDeGrupo.Size = new Size(95, 24);
+            cbDeGrupo.TabIndex = 57;
+            cbDeGrupo.Text = "De Grupo";
+            cbDeGrupo.UseVisualStyleBackColor = true;
+            cbDeGrupo.CheckedChanged += cbDeGrupo_CheckedChanged;
+            // 
+            // cbSolista
+            // 
+            cbSolista.AutoSize = true;
+            cbSolista.Location = new Point(43, 47);
+            cbSolista.Name = "cbSolista";
+            cbSolista.Size = new Size(75, 24);
+            cbSolista.TabIndex = 56;
+            cbSolista.Text = "Solista";
+            cbSolista.UseVisualStyleBackColor = true;
+            cbSolista.CheckedChanged += cbSolista_CheckedChanged;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(cbSolista);
+            groupBox1.Controls.Add(cbDeGrupo);
+            groupBox1.Controls.Add(lblNombreTipo);
+            groupBox1.Controls.Add(tbNombreTipo);
+            groupBox1.Location = new Point(426, 111);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(342, 187);
+            groupBox1.TabIndex = 58;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Tipo";
+            // 
             // FormEliminar
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(groupBox1);
             Controls.Add(btnBorrar);
             Controls.Add(lbBorrar);
             Controls.Add(btnBuscar);
-            Controls.Add(tbNombreTipo);
-            Controls.Add(lblNombreTipo);
             Controls.Add(lblCancion);
             Controls.Add(nbPuntuacion);
             Controls.Add(lblPuntuacion);
             Controls.Add(tbCancion);
-            Controls.Add(gbTipo);
             Controls.Add(tbNacionalidad);
             Controls.Add(lblNacionalidad);
             Controls.Add(tbGenero);
@@ -311,9 +313,9 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nbPuntuacion).EndInit();
-            gbTipo.ResumeLayout(false);
-            gbTipo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nbEdad).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -333,9 +335,6 @@
         private NumericUpDown nbPuntuacion;
         private Label lblPuntuacion;
         private TextBox tbCancion;
-        private GroupBox gbTipo;
-        private RadioButton rbDeGrupo;
-        private RadioButton rbSolista;
         private TextBox tbNacionalidad;
         private Label lblNacionalidad;
         private TextBox tbGenero;
@@ -347,5 +346,8 @@
         private Button btnBorrar;
         private FontDialog fontDialog1;
         private ListBox lbBorrar;
+        private CheckBox cbDeGrupo;
+        private CheckBox cbSolista;
+        private GroupBox groupBox1;
     }
 }
