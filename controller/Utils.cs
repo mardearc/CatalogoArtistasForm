@@ -38,12 +38,54 @@ namespace CatalogoArtistas.controller
             CtrlArtista ctrlArtista = CtrlArtista.GetControlador();
             List<Artista> listaArtistas = ctrlArtista.ConsultarDatos();
 
-            if (listaArtistas.Count == 0)
-            {
-                return 1; // Si la lista está vacía, el primer ID será 1
-            }
+            int max = 0;
 
-            return listaArtistas.Max(artista => artista.Id) + 1; // Incrementa el ID más alto
+            if (listaArtistas.Count > 0)
+            {
+                max = listaArtistas.Max(artista => artista.Id) + 1;
+            }
+            int maxImagen = obtenerNumeroMaxImagen("images");
+
+            if (max > maxImagen)
+            {
+                return max;
+            }
+            else
+            {
+                return maxImagen;
+            }
+        }
+
+        public static int obtenerNumeroMaxImagen(string rutaDirectorio)
+        {
+
+            int max = 0;
+
+            // Obtener todos los archivos con extensión .jpg en el directorio
+            string[] imagenes = Directory.GetFiles(rutaDirectorio, "*.jpg");
+
+            if (imagenes.Length > 0)
+            {
+                foreach (string ruta in imagenes)
+                {
+                    // Obtener el nombre del archivo sin la ruta y sin la extensión
+                    string numero = Path.GetFileNameWithoutExtension(ruta);
+
+                    if (numero != "default")
+                    {
+                        int num = Int32.Parse(numero);
+
+                        // Actualizar el número máximo encontrado
+                        if (num > max)
+                        {
+                            max = num;
+                        }
+
+                    }
+                }
+            }
+            // Retornar el siguiente número
+            return max + 1;
         }
     }
 }

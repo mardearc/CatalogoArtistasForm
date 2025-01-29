@@ -95,6 +95,7 @@
             archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             archivoToolStripMenuItem.Size = new Size(73, 24);
             archivoToolStripMenuItem.Text = "Archivo";
+            archivoToolStripMenuItem.Click += archivoToolStripMenuItem_Click;
             // 
             // cargarToolStripMenuItem
             // 
@@ -107,7 +108,7 @@
             // 
             guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
             guardarToolStripMenuItem.Size = new Size(224, 26);
-            guardarToolStripMenuItem.Text = "Guardar";
+            guardarToolStripMenuItem.Text = "Guardar Como";
             guardarToolStripMenuItem.Click += guardarToolStripMenuItem_Click;
             // 
             // dgConsultar
@@ -119,7 +120,6 @@
             dgConsultar.Name = "dgConsultar";
             dgConsultar.ReadOnly = true;
             dgConsultar.RowHeadersWidth = 51;
-            dgConsultar.ScrollBars = ScrollBars.Vertical;
             dgConsultar.Size = new Size(776, 355);
             dgConsultar.TabIndex = 1;
             // 
@@ -141,8 +141,10 @@
             Controls.Add(btnAbrirListado);
             Controls.Add(dgConsultar);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "FormConsultar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Catálogo de Artistas";

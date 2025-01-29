@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEliminar));
             menuStrip1 = new MenuStrip();
             consultarToolStripMenuItem = new ToolStripMenuItem();
             agregarToolStripMenuItem = new ToolStripMenuItem();
@@ -307,6 +308,9 @@
             Controls.Add(tbNombre);
             Controls.Add(lblNombre);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FormEliminar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BorrarEmpleado";

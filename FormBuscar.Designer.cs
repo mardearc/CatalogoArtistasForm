@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBuscar));
             menuStrip1 = new MenuStrip();
             consultarToolStripMenuItem = new ToolStripMenuItem();
             agregarToolStripMenuItem = new ToolStripMenuItem();
@@ -295,6 +296,9 @@
             Controls.Add(tbNombre);
             Controls.Add(lblNombre);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FormBuscar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BuscarForm";

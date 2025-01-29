@@ -8,12 +8,13 @@ namespace CatalogoArtistasForm
     {
         CtrlArtista ctrlArtista = CtrlArtista.GetControlador();
 
+        String rutaOrigen = "";
         public FormAgregar()
         {
             InitializeComponent();
 
             //Asignar imagen por defecto a el PictureBox
-            pbImagen.Image = Image.FromFile("../../../images/default.jpg");
+            pbImagen.Image = Image.FromFile("images/default.jpg");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -41,6 +42,7 @@ namespace CatalogoArtistasForm
 
         }
 
+        //Controlar que la edad no sea mayor a 120
         private void nbEdad_ValueChanged(object sender, EventArgs e)
         {
             if (nbEdad.Value >= 120)
@@ -84,7 +86,7 @@ namespace CatalogoArtistasForm
         {
             Artista a;
 
-            
+
             string Nombre = "";
             int Edad = 0;
             string Genero = "";
@@ -187,14 +189,23 @@ namespace CatalogoArtistasForm
                     a = deGrupo;
                 }
 
+
+                //Añadir artista a la lista
+                ctrlArtista.AddArtista(a);
+
+                //Si se ha añadido foto se guarda con el mismo id que el del artista
+                if (rutaOrigen.Length > 0)
+                {
+                    string rutaImagen = $"images/{Utils.GenerarNuevoId() - 1}.jpg";
+                    File.Copy(rutaOrigen, rutaImagen, true);
+                }
+
                 // Liberar la imagen al aceptar
                 if (pbImagen.Image != null)
                 {
                     pbImagen.Image.Dispose();
-                    pbImagen.Image = Image.FromFile("../../../images/default.jpg");
+                    pbImagen.Image = Image.FromFile("images/default.jpg");
                 }
-
-                ctrlArtista.AddArtista(a);
 
                 //Poner textfields en blanco
                 tbNombre.Text = "";
@@ -244,11 +255,12 @@ namespace CatalogoArtistasForm
             buscarForm.ShowDialog();
             this.Close();
         }
-        
+
         //Botón para subir foto
         private void btnSubirFoto_Click(object sender, EventArgs e)
         {
-            string rutaImagen = $"../../../images/{Utils.GenerarNuevoId()}.jpg";
+            //Ruta en la que se va a guardar la imagen
+            
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 // Configuración del cuadro de diálogo solo JPG
@@ -270,8 +282,7 @@ namespace CatalogoArtistasForm
                         pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
                         pbImagen.Image = Image.FromFile(ofd.FileName);
 
-                        // Copiar la imagen al directorio de la aplicación con el nombre basado en cont
-                        File.Copy(ofd.FileName, rutaImagen, true);
+                        rutaOrigen = ofd.FileName;
 
                     }
                     catch (Exception ex)

@@ -25,6 +25,15 @@
 
   <ItemGroup>
     <None Include="bin\Debug\net8.0-windows\artistas.dat" />
+    <None Include="bin\Debug\net8.0-windows\images\1.jpg" />
+    <None Include="bin\Debug\net8.0-windows\images\11.jpg" />
+    <None Include="bin\Debug\net8.0-windows\images\12.jpg" />
+    <None Include="bin\Debug\net8.0-windows\images\2.jpg" />
+    <None Include="bin\Debug\net8.0-windows\images\4.jpg" />
+    <None Include="bin\Debug\net8.0-windows\images\5.jpg" />
+    <None Include="bin\Debug\net8.0-windows\images\6.jpg" />
+    <None Include="bin\Debug\net8.0-windows\images\8.jpg" />
+    <None Include="bin\Debug\net8.0-windows\images\default.jpg" />
   </ItemGroup>
 
 </Project>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormListado));
             lbNombre = new Label();
             lbContNombre = new Label();
             lbEdad = new Label();
@@ -355,6 +356,7 @@
             pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
             pbImagen.TabIndex = 21;
             pbImagen.TabStop = false;
+            pbImagen.Click += pbImagen_Click;
             // 
             // lbCancion
             // 
@@ -410,6 +412,9 @@
             Controls.Add(lbContArtista);
             Controls.Add(lbContNombre);
             Controls.Add(lbContCancion);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FormListado";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormListado";

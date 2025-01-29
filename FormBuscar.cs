@@ -50,6 +50,7 @@ namespace CatalogoArtistasForm.model
             }
         }
 
+        //Abrir ventana consultar
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormConsultar form1 = new FormConsultar();
@@ -57,7 +58,7 @@ namespace CatalogoArtistasForm.model
             form1.ShowDialog();
             this.Close();
         }
-
+        //Abrir ventana agregar
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormAgregar agregar = new();
@@ -65,7 +66,7 @@ namespace CatalogoArtistasForm.model
             agregar.ShowDialog();
             this.Close();
         }
-
+        //Abrir ventana ordenar
         private void ordenarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormOrdenar ordenar = new FormOrdenar();
@@ -73,7 +74,7 @@ namespace CatalogoArtistasForm.model
             ordenar.ShowDialog();
             this.Close();
         }
-
+        //Abrir ventana eliminar
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormEliminar borrarEmpleado = new FormEliminar();
@@ -81,7 +82,7 @@ namespace CatalogoArtistasForm.model
             borrarEmpleado.ShowDialog();
             this.Close();
         }
-
+        //Si es solista se elige el nombre de pila
         private void cbSolista_CheckedChanged(object sender, EventArgs e)
         {
             cbDeGrupo.Checked = false;
@@ -96,6 +97,7 @@ namespace CatalogoArtistasForm.model
             }
         }
 
+        //Si es de grupo se elige el nombre de grupo
         private void cbDeGrupo_CheckedChanged(object sender, EventArgs e)
         {
             cbSolista.Checked = false;

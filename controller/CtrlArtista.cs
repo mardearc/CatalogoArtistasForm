@@ -4,7 +4,7 @@ namespace CatalogoArtistas.controller
 {
     internal class CtrlArtista
     {
-        private const string Fichero = "artistas.dat"; //Ruta del fichero
+        private static string Fichero = "artistas.dat"; //Ruta del fichero
 
         private List<Artista> Artistas = new List<Artista>();
 
@@ -27,18 +27,19 @@ namespace CatalogoArtistas.controller
         }
 
         //Método para cargar los datos desde el fichero
-        public void CargarDatos(string ruta = Fichero)
+        public void CargarDatos(string ruta = null)
         {
 
-            if (ruta != Fichero)
+            if (ruta != null)
             {
-                
+                Fichero = ruta;
             }
             
             Artistas.Clear();
+
             try
             {
-                using (FileStream fs = new FileStream("artistas.dat", FileMode.Open))
+                using (FileStream fs = new FileStream(Fichero, FileMode.Open))
                 using (BinaryReader br = new BinaryReader(fs))
                 {
                     while (fs.Position < fs.Length - sizeof(char))
@@ -91,8 +92,12 @@ namespace CatalogoArtistas.controller
 
 
         //Método para escribir los datos en el fichero
-        public void EscribirDatos(string ruta = Fichero)
+        public void EscribirDatos(string ruta = null)
         {
+            if (ruta != null)
+            {
+                Fichero = ruta;
+            }
             if (File.Exists(Fichero))
             {
                 DateTime dt = DateTime.Now;
@@ -201,7 +206,7 @@ namespace CatalogoArtistas.controller
                 int id = artista.Id;
 
                 // Elimina la imagen asociada al artista.
-                string rutaImagen = $"../../../images/{id}.jpg";
+                string rutaImagen = $"images/{id}.jpg";
                 if (File.Exists(rutaImagen))
                 {
                     try
@@ -223,15 +228,7 @@ namespace CatalogoArtistas.controller
         }
 
         //Método para listar todos los artistas en el orden introducido
-        public List<Artista> ConsultarDatos()
-        {
-            foreach (Artista artista in Artistas)
-            {
-                Console.WriteLine(artista);
-            }
-
-            return Artistas;
-        }
+        public List<Artista> ConsultarDatos() => Artistas;
 
         //Método para filtrar los artistas por uno o más atributos
         public List<Artista> Buscar(int Edad, double Puntuacion, char Tipo, string Nombre = null, string Genero = null, string Nacionalidad = null, string Cancion = null, string NombrePila = null, string NombreGrupo = null)
@@ -474,7 +471,7 @@ namespace CatalogoArtistas.controller
             return listFiltrada; //Devuelve la lista filtrada
         }
 
-        //Método para modificar un artista, recibe el índice del que sea modificar y el Artista modificado
+        //Método para modificar un artista, recibe el índice del que desea modificar y el Artista modificado
         internal void Modificar(int busqueda, Artista modificado)
         {
             

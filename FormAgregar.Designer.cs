@@ -317,7 +317,9 @@
             Controls.Add(tbNombre);
             Controls.Add(lblNombre);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FormAgregar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormAgregar";

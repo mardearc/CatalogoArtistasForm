@@ -24,6 +24,7 @@ namespace CatalogoArtistasForm
             InitializeComponent();
         }
 
+        //Botón para buscar
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             lbBorrar.Items.Clear();
@@ -47,9 +48,10 @@ namespace CatalogoArtistasForm
                 Tipo = 'g';
                 NombreGrupo = tbNombreTipo.Text;
             }
-
+            //Guardar en una lista los registros que cumplen la condición
             listBorrar = ctrlArtista.Buscar(Edad, Puntuacion, Tipo, Nombre, Genero, Nacionalidad, Cancion, NombrePila, NombreGrupo);
 
+            //Añadirlos a la lista del formulario
             foreach (Artista artista in listBorrar)
             {
                 lbBorrar.Items.Add(artista);
@@ -57,11 +59,12 @@ namespace CatalogoArtistasForm
 
 
         }
-
+        //Botón para eliminar artistas
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             int items = listBorrar.Count;
 
+            //Si hay artistas se da la opción de borrar
             if (items > 0)
             {
                 DialogResult respuesta = MessageBox.Show($"¿Seguro que quiere borrar {items} artistas?", "¡CUIDADO!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -82,13 +85,13 @@ namespace CatalogoArtistasForm
                     MessageBox.Show($"Se han eliminado {cont} artistas");
                 }
             }
-            else
+            else //Si no hay artistas salta un MessageBox
             {
                 MessageBox.Show($"No hay artistas para eliminar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
-
+        //Abrir ventana consultar
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormConsultar ordenar = new FormConsultar();
@@ -96,7 +99,7 @@ namespace CatalogoArtistasForm
             ordenar.ShowDialog();
             this.Close();
         }
-
+        //Abrir ventana agregar
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormAgregar agregar = new FormAgregar();
@@ -104,7 +107,7 @@ namespace CatalogoArtistasForm
             agregar.ShowDialog();
             this.Close();
         }
-
+        //Abrir ventana ordenar
         private void ordenarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormOrdenar ordenar = new FormOrdenar();
@@ -112,7 +115,7 @@ namespace CatalogoArtistasForm
             ordenar.ShowDialog();
             this.Close();
         }
-
+        //Abrir ventana buscar
         private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormBuscar buscarForm = new FormBuscar();
@@ -121,6 +124,7 @@ namespace CatalogoArtistasForm
             this.Close();
         }
 
+        //Si es solista se elige el nombre de pila
         private void cbSolista_CheckedChanged(object sender, EventArgs e)
         {
             cbDeGrupo.Checked = false;
@@ -134,7 +138,7 @@ namespace CatalogoArtistasForm
                 lblNombreTipo.Visible = false;
             }
         }
-
+        //Si es de grupo se elige el nombre de grupo
         private void cbDeGrupo_CheckedChanged(object sender, EventArgs e)
         {
             cbSolista.Checked = false;

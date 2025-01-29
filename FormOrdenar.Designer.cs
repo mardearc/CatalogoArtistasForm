@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormOrdenar));
             btnNombre = new Button();
             btnEdad = new Button();
             menuStrip1 = new MenuStrip();
@@ -72,7 +73,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { consultarToolStripMenuItem, agregarToolStripMenuItem, ordenarToolStripMenuItem, buscarToolStripMenuItem, eliminarToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(540, 28);
+            menuStrip1.Size = new Size(390, 28);
             menuStrip1.TabIndex = 5;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -175,6 +176,9 @@
             Controls.Add(menuStrip1);
             Controls.Add(btnEdad);
             Controls.Add(btnNombre);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FormOrdenar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormOrdenar";

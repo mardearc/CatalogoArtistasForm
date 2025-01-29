@@ -22,14 +22,14 @@ namespace CatalogoArtistasForm.model
         {
             InitializeComponent();
 
-
+            //Cargar los datos del fichero
             ctrlArtista.CargarDatos();
             artistas = ctrlArtista.ConsultarDatos();
             max = artistas.Count;
             lbContArtista.Text = $"{cont + 1} de {max}";
 
-            
 
+            //Cargar datos en el formulario
             Cargar();
 
 
@@ -38,7 +38,7 @@ namespace CatalogoArtistasForm.model
             btnVolver.Enabled = !(cont <= 0);
 
         }
-
+        //Botón para ir a un artista posterior
         private void btnPasar_Click(object sender, EventArgs e)
         {
             if (cont < max - 1)
@@ -52,12 +52,13 @@ namespace CatalogoArtistasForm.model
 
             btnVolver.Enabled = !(cont <= 0);
         }
+        //Métood para cargar el artista
         private void Cargar()
         {
             string rutaImagen = "";
             if (artistas.Count > 0)
             {
-                rutaImagen = $"../../../images/{artistas[cont].Id}.jpg";
+                rutaImagen = $"images/{artistas[cont].Id}.jpg";
 
                 // Liberar cualquier imagen previamente cargada.
                 if (pbImagen.Image != null)
@@ -72,7 +73,7 @@ namespace CatalogoArtistasForm.model
                 }
                 else
                 {
-                    pbImagen.Image = Image.FromFile("../../../images/default.jpg");
+                    pbImagen.Image = Image.FromFile("images/default.jpg");
                 }
 
                 lbContArtista.Text = $"{cont + 1} de {max}";
@@ -95,7 +96,7 @@ namespace CatalogoArtistasForm.model
                 }
             }
         }
-
+        //Botón para eliminar un artista
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             DialogResult respuesta = MessageBox.Show($"¿Seguro que quiere borrar el artista?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -107,7 +108,7 @@ namespace CatalogoArtistasForm.model
 
                 try
                 {
-                    string rutaImagen = $"../../../images/{artistas[cont].Id}.jpg";
+                    string rutaImagen = $"images/{artistas[cont].Id}.jpg";
                     // Liberar la imagen antes de eliminar el archivo.
                     if (pbImagen.Image != null)
                     {
@@ -122,7 +123,7 @@ namespace CatalogoArtistasForm.model
                     MessageBox.Show($"No se pudo eliminar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                
+
 
                 if (max == 0) // Si no hay elementos en la lista, cierra el formulario
                 {
@@ -135,7 +136,7 @@ namespace CatalogoArtistasForm.model
                 Cargar();
             }
         }
-
+        //Botón para ir a un artista anterior
         private void btnVolver_Click(object sender, EventArgs e)
         {
             if (cont > 0)
@@ -151,8 +152,8 @@ namespace CatalogoArtistasForm.model
             btnVolver.Enabled = !(cont <= 0);
         }
 
-        
 
+        //Botón para modificar artista
         private void btnModificar_Click(object sender, EventArgs e)
         {
             panelDatos.Visible = true;
@@ -184,6 +185,7 @@ namespace CatalogoArtistasForm.model
 
         }
 
+        //Botón aceptar modificación
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             Artista a;
@@ -222,12 +224,12 @@ namespace CatalogoArtistasForm.model
 
             panelDatos.Visible = false;
         }
-
+        //Si es solista se elige el nombre de pila
         private void rbSolista_CheckedChanged(object sender, EventArgs e)
         {
             lbNombreTipo.Text = "Nombre de pila:";
         }
-
+        //si es de grupo se elige el nombre de grupo
         private void rbDeGrupo_CheckedChanged(object sender, EventArgs e)
         {
             lbNombreTipo.Text = "Nombre de grupo:";
@@ -237,7 +239,7 @@ namespace CatalogoArtistasForm.model
         {
 
         }
-
+        //Cerrar este formulario, liberar la imagen
         private void btnAtras_Click(object sender, EventArgs e)
         {
             // Liberar la imagen antes de cerrar el formulario
@@ -252,9 +254,10 @@ namespace CatalogoArtistasForm.model
             this.Close();
         }
 
+        //Botón para subir la foto
         private void btnSubirFoto_Click(object sender, EventArgs e)
         {
-            string rutaImagen = $"../../../images/{artistas[cont].Id}.jpg";
+            string rutaImagen = $"images/{artistas[cont].Id}.jpg";
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 // Configuración del cuadro de diálogo para solo JPG
@@ -286,6 +289,11 @@ namespace CatalogoArtistasForm.model
                     }
                 }
             }
+        }
+
+        private void pbImagen_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
